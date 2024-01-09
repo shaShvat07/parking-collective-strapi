@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "parking_imgs",
+  "info": {
+    "singularName": "parking-img",
+    "pluralName": "parking-imgs",
+    "displayName": "ParkingImg",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "parkingId": {
+      "type": "string",
+      "unique": false
+    },
+    "Document_Name": {
+      "type": "string",
+      "unique": false
+    },
+    "Img": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}
