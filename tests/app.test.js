@@ -1,21 +1,17 @@
-// @ts-ignore
 const fs = require('fs');
-const { setupStrapi, cleanupStrapi } = require("./helpers/strapi");
+const { setupStrapi, cleanupStrapi } = require('./helpers/strapi');
 
-// @ts-ignore
+let strapi; 
+
 beforeAll(async () => {
-    await setupStrapi();
+  strapi = await setupStrapi(); 
 });
 
-// @ts-ignore
 afterAll(async () => {
-    await cleanupStrapi();
+  const dbSettings = strapi.config.get('database.connections.default.settings');
+  await cleanupStrapi();
 });
 
-// @ts-ignore
-it("strapi is defined", () => {
-    // @ts-ignore
-    expect(strapi).toBeDefined();
+it('strapi is defined', () => {
+  expect(strapi).toBeDefined();
 });
-
-require('./parking-img');
