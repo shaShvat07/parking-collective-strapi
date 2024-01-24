@@ -1,13 +1,15 @@
 const { ValidationError } = require("@strapi/utils").errors;
 module.exports = {
+  //beforeGet console
   async beforeCreate(event) {
     const data = event.params.data;
     const parkingId = data.parkingId;
     const Document_Name = data.Document_Name;
-    const ctx = strapi.requestContext.get();
-    // @ts-ignore
-    const files = ctx.request.files;
-    console.log(files);
+    // const ctx = strapi.requestContext.get();
+    // // @ts-ignore
+    // const files = ctx.request.files;
+    const files = event.params.files || {};
+    // console.log(files);
     const existingRecord = await strapi
       .query('api::parking-img.parking-img')
       .findOne({
@@ -43,6 +45,7 @@ module.exports = {
     const { id } = where;
     const existingParking = event.state;
     if (existingParking.Img && existingParking.Img.length > 0) {
+      // The following two lines are yet to be tested
       existingParking.Img.forEach(async (media) => {
         await strapi.plugins["upload"].services.upload.remove(media);
       });
